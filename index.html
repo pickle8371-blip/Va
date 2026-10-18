@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SAMURAI: The Endless Plains</title>
+    <meta name="description" content="A third-person samurai exploration game across endless golden grasslands." />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <canvas id="game" tabindex="0" aria-label="Game view"></canvas>
+
+    <div id="loading" class="screen loading">
+      <div class="loading-inner">
+        <div class="kanji" aria-hidden="true">侍</div>
+        <div class="loading-title">The Endless Plains</div>
+        <div class="bar"><div id="loading-bar" class="bar-fill"></div></div>
+        <div id="loading-status" class="loading-status">Preparing the land…</div>
+      </div>
+    </div>
+
+    <div id="title" class="screen title hidden">
+      <div class="title-inner">
+        <div class="kanji" aria-hidden="true">侍</div>
+        <h1>SAMURAI<span>The Endless Plains</span></h1>
+        <p class="tagline">Wander the wind-swept grasslands beneath the mountains.</p>
+        <button id="start-button" class="primary" type="button">Start Exploring</button>
+        <div class="controls-guide" aria-label="Controls">
+          <div><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span>Walk</span></div>
+          <div><kbd>Mouse</kbd><span>Look around</span></div>
+          <div><kbd>Shift</kbd><span>Sprint</span></div>
+          <div><kbd>Space</kbd><span>Jump</span></div>
+          <div><kbd>Esc</kbd><span>Pause</span></div>
+          <div><kbd>R</kbd><span>Return to start</span></div>
+          <div><kbd>F</kbd><span>Fullscreen</span></div>
+          <div><kbd>Wheel</kbd><span>Camera distance</span></div>
+        </div>
+        <p class="note">Click inside the game to capture the mouse. Sound starts when you begin.</p>
+      </div>
+    </div>
+
+    <div id="pause" class="screen pause hidden" role="dialog" aria-modal="true" aria-labelledby="pause-heading">
+      <div class="panel">
+        <h2 id="pause-heading">Paused</h2>
+        <div class="buttons">
+          <button id="resume-button" class="primary" type="button">Resume</button>
+          <button id="restart-button" type="button">Return to Start</button>
+          <button id="fullscreen-button" type="button">Toggle Fullscreen</button>
+        </div>
+        <div class="settings">
+          <label>Graphics quality
+            <select id="quality-select">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+              <option value="ultra">Ultra</option>
+            </select>
+          </label>
+          <label>Ambient volume <span id="volume-value" class="value"></span>
+            <input id="volume-range" type="range" min="0" max="1" step="0.01" />
+          </label>
+          <label>Mouse sensitivity <span id="sensitivity-value" class="value"></span>
+            <input id="sensitivity-range" type="range" min="0.2" max="3" step="0.05" />
+          </label>
+          <label>Camera distance <span id="distance-value" class="value"></span>
+            <input id="distance-range" type="range" min="2.2" max="9" step="0.1" />
+          </label>
+          <label class="check"><input id="invert-check" type="checkbox" /> Invert vertical look</label>
+          <label class="check"><input id="dynres-check" type="checkbox" /> Adaptive resolution</label>
+          <label class="check"><input id="fps-check" type="checkbox" /> Show frame rate</label>
+        </div>
+        <div class="controls-guide compact">
+          <div><kbd>WASD</kbd><span>Walk</span></div>
+          <div><kbd>Shift</kbd><span>Sprint</span></div>
+          <div><kbd>Space</kbd><span>Jump</span></div>
+          <div><kbd>R</kbd><span>Return to start</span></div>
+          <div><kbd>F</kbd><span>Fullscreen</span></div>
+          <div><kbd>Esc</kbd><span>Resume</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="hint" class="hint hidden">Click to look around</div>
+    <div id="fps" class="fps hidden"></div>
+    <div id="fade" class="fade"></div>
+    <div id="error" class="screen error hidden" role="alert">
+      <div class="panel">
+        <h2>Unable to start</h2>
+        <p id="error-message"></p>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

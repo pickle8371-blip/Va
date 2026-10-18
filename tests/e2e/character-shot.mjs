@@ -1,0 +1,18 @@
+import { createServer } from 'vite';
+import { chromium } from 'playwright';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const query = process.argv[2] || '';
+const name = process.argv[3] || 'character';
+const server = await createServer({ root, server: { port: 5198 }, logLevel: 'error' });
+await server.listen();
+const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
+const page = await browser.newPage({ viewport: { width: 1200, height: 500 } });
+page.on('pageerror', (e) => console.log('pageerror', e.message));
+page.on('console', (m) => { if (m.type() === 'error' || m.type() === 'warning') console.log(m.text()); });
+await page.goto(`http://localhost:5198/tests/e2e/character-view.html?${query}`);
+await page.waitForFunction(() => window.__done, null, { timeout: 120000 });
+await page.screenshot({ path: path.join(root, `tests/e2e/output/${name}.png`) });
+await browser.close();
+await server.close();
