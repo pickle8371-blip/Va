@@ -1,0 +1,23 @@
+{
+  "name": "samurai-endless-plains",
+  "version": "1.0.0",
+  "description": "SAMURAI: THE ENDLESS PLAINS - a third-person samurai exploration game for the browser (Three.js + Web Audio).",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "start": "vite --open",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:browser": "node tests/e2e/browser-check.mjs"
+  },
+  "dependencies": {
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1",
+    "vite": "6.4.4",
+    "vitest": "5.0.5"
+  }
+}
